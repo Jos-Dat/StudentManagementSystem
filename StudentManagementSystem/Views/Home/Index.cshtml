@@ -1,0 +1,179 @@
+﻿@model IEnumerable<StudentManagementSystem.Models.Course>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Student Management System</h1>
+    <p class="lead">A comprehensive platform for students, faculty, and administrators to manage academic courses and student enrollments.</p>
+
+    @if (!ViewBag.IsAuthenticated)
+    {
+        <hr class="my-4">
+        <p>Get started by logging in or registering an account.</p>
+        <div class="btn-group">
+            <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-success btn-lg">
+                <i class="fas fa-user-plus"></i> Register
+            </a>
+        </div>
+    }
+    else
+    {
+        <hr class="my-4">
+        <p>Welcome back! Navigate to your dashboard or browse courses.</p>
+        <div class="btn-group">
+            @if (ViewBag.UserRole == UserRole.Admin)
+            {
+                <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-primary btn-lg">
+                    <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+                </a>
+            }
+            else if (ViewBag.UserRole == UserRole.Faculty)
+            {
+                <a asp-controller="Course" asp-action="FacultyCourses" class="btn btn-primary btn-lg">
+                    <i class="fas fa-chalkboard-teacher"></i> My Courses
+                </a>
+            }
+            else if (ViewBag.UserRole == UserRole.Student)
+            {
+                <a asp-controller="Student" asp-action="Dashboard" class="btn btn-primary btn-lg">
+                    <i class="fas fa-user-graduate"></i> Student Dashboard
+                </a>
+            }
+            <a asp-controller="Course" asp-action="Index" class="btn btn-info btn-lg">
+                <i class="fas fa-book"></i> Browse Courses
+            </a>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2><i class="fas fa-book"></i> Featured Courses</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.Any())
+                {
+                    <div class="row">
+                        @foreach (var course in Model)
+                        {
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-header bg-info text-white">
+                                        <h5>@course.CourseCode</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">@course.Title</h5>
+                                        <p class="card-text">
+                                            @if (string.IsNullOrEmpty(course.Description))
+                                            {
+                                                <span class="text-muted">No description available</span>
+                                            }
+                                            else
+                                            {
+                                                @(course.Description.Length > 150 ? course.Description.Substring(0, 150) + "..." : course.Description)
+                                            }
+                                        </p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span class="badge badge-primary">Credits: @course.Credits</span>
+                                                <span class="badge badge-secondary">@course.Semester</span>
+                                            </div>
+                                            @{
+                                                int enrolledCount = course.Enrollments?.Count ?? 0;
+                                                int availableSeats = Math.Max(0, course.MaxStudents - enrolledCount);
+                                            }
+                                            @if (availableSeats > 0)
+                                            {
+                                                <span class="badge badge-success">@availableSeats seats available</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Full</span>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-info-circle"></i> View Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No courses are currently available.
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Course" asp-action="Index" class="btn btn-primary">
+                    <i class="fas fa-list"></i> View All Courses
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4><i class="fas fa-user-graduate"></i> For Students</h4>
+            </div>
+            <div class="card-body">
+                <p>Our system allows students to:</p>
+                <ul>
+                    <li>Register for courses</li>
+                    <li>View course information</li>
+                    <li>Track academic progress</li>
+                    <li>Access transcripts</li>
+                    <li>Manage personal profile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4><i class="fas fa-chalkboard-teacher"></i> For Faculty</h4>
+            </div>
+            <div class="card-body">
+                <p>Faculty members can:</p>
+                <ul>
+                    <li>Manage assigned courses</li>
+                    <li>View student enrollments</li>
+                    <li>Grade student assignments</li>
+                    <li>Communicate with students</li>
+                    <li>Update course information</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4><i class="fas fa-user-shield"></i> For Administrators</h4>
+            </div>
+            <div class="card-body">
+                <p>Administrators have access to:</p>
+                <ul>
+                    <li>User management system</li>
+                    <li>Course creation and management</li>
+                    <li>Student enrollment management</li>
+                    <li>System configuration</li>
+                    <li>Reporting and analytics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

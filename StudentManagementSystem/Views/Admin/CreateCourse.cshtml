@@ -1,0 +1,100 @@
+﻿@model StudentManagementSystem.Models.Course
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h2><i class="fas fa-book-medical"></i> Create New Course</h2>
+    </div>
+    <div class="card-body">
+        <form asp-controller="Admin" asp-action="CreateCourse" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="CourseCode" class="control-label"></label>
+                        <input asp-for="CourseCode" class="form-control" />
+                        <span asp-validation-for="CourseCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Credits" class="control-label"></label>
+                        <input asp-for="Credits" class="form-control" type="number" min="1" max="10" />
+                        <span asp-validation-for="Credits" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="MaxStudents" class="control-label"></label>
+                        <input asp-for="MaxStudents" class="form-control" type="number" min="1" />
+                        <span asp-validation-for="MaxStudents" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="FacultyId" class="control-label"></label>
+                        <input asp-for="FacultyId" class="form-control" type="number" />
+                        <span asp-validation-for="FacultyId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Semester" class="control-label"></label>
+                        <select asp-for="Semester" class="form-control">
+                            <option value="">Select Semester</option>
+                            <option value="Fall 2024">Fall 2024</option>
+                            <option value="Spring 2025">Spring 2025</option>
+                            <option value="Summer 2025">Summer 2025</option>
+                        </select>
+                        <span asp-validation-for="Semester" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Create
+                </button>
+                <a asp-action="ManageCourses" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,119 @@
+﻿@model StudentManagementSystem.ViewModels.CourseRegistrationViewModel
+@{
+    ViewData["Title"] = "Course Registration";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2><i class="fas fa-book"></i> Course Registration</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Browse and register for available courses below:</p>
+
+                @if (Model.AvailableCourses.Count > 0)
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Course Code</th>
+                                    <th>Title</th>
+                                    <th>Credits</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var course in Model.AvailableCourses)
+                                {
+                                    <tr>
+                                        <td>@course.CourseCode</td>
+                                        <td>@course.Title</td>
+                                        <td>@course.Credits</td>
+                                        <td>
+                                            @if (string.IsNullOrEmpty(course.Description))
+                                            {
+                                                <span class="text-muted">No description available</span>
+                                            }
+                                            else
+                                            {
+                                                @(course.Description.Length > 100 ? course.Description.Substring(0, 100) + "..." : course.Description)
+                                            }
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#enrollModal-@course.Id">
+                                                <i class="fas fa-plus-circle"></i> Enroll
+                                            </button>
+
+                                            <div class="modal fade" id="enrollModal-@course.Id" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel-@course.Id" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <form asp-action="EnrollCourse" method="post">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="enrollModalLabel-@course.Id">Enroll in @course.CourseCode: @course.Title</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="CourseId" value="@course.Id" />
+
+                                                                <div class="form-group">
+                                                                    <label for="Semester">Semester:</label>
+                                                                    <select name="Semester" class="form-control" required>
+                                                                        <option value="">Select Semester</option>
+                                                                        <option value="Fall 2024">Fall 2024</option>
+                                                                        <option value="Spring 2025">Spring 2025</option>
+                                                                        <option value="Summer 2025">Summer 2025</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="AcademicYear">Academic Year:</label>
+                                                                    <select name="AcademicYear" class="form-control" required>
+                                                                        <option value="">Select Academic Year</option>
+                                                                        <option value="2024-2025">2024-2025</option>
+                                                                        <option value="2025-2026">2025-2026</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="alert alert-info">
+                                                                    <strong>Note:</strong> By enrolling in this course, you agree to abide by all course policies and requirements.
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary">Confirm Enrollment</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id" class="btn btn-info btn-sm">
+                                                <i class="fas fa-info-circle"></i> Details
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> There are no available courses for registration at this time.
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-action="Dashboard" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+﻿@model StudentManagementSystem.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-4">Admin Dashboard</h1>
+            <p class="lead">Welcome to the Student Management System admin panel.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-user-graduate"></i> Students</h4>
+            </div>
+            <div class="card-body">
+                <h2 class="display-4 text-center">@Model.TotalStudents</h2>
+                <p class="text-center">Total Students</p>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("ManageUsers", new { role = "Student" })" class="btn btn-light btn-block">
+                    <i class="fas fa-users"></i> Manage Students
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-chalkboard-teacher"></i> Faculty</h4>
+            </div>
+            <div class="card-body">
+                <h2 class="display-4 text-center">@Model.TotalFaculty</h2>
+                <p class="text-center">Total Faculty</p>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("ManageUsers", new { role = "Faculty" })" class="btn btn-light btn-block">
+                    <i class="fas fa-users"></i> Manage Faculty
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-book"></i> Courses</h4>
+            </div>
+            <div class="card-body">
+                <h2 class="display-4 text-center">@Model.TotalCourses</h2>
+                <p class="text-center">Total Courses</p>
+            </div>
+            <div class="card-footer">
+                <a asp-action="ManageCourses" class="btn btn-light btn-block">
+                    <i class="fas fa-cogs"></i> Manage Courses
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h4><i class="fas fa-user-plus"></i> Recent Students</h4>
+            </div>
+            <div class="card-body">
+                @if (Model.RecentStudents.Count > 0)
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Student Number</th>
+                                <th>Name</th>
+                                <th>Enrollment Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var student in Model.RecentStudents)
+                            {
+                                <tr>
+                                    <td>@student.StudentNumber</td>
+                                    <td>@student.User.FirstName @student.User.LastName</td>
+                                    <td>@student.EnrollmentDate.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <a asp-action="EditUser" asp-route-id="@student.UserId" class="btn btn-sm btn-info">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">No students found.</div>
+                }
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("ManageUsers", new { role = "Student" })" class="btn btn-secondary btn-block">
+                    View All Students
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h4><i class="fas fa-cog"></i> Quick Actions</h4>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a asp-action="CreateUser" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user-plus"></i> Add New User
+                    </a>
+                    <a asp-action="CreateCourse" class="list-group-item list-group-item-action">
+                        <i class="fas fa-plus-circle"></i> Add New Course
+                    </a>
+                    <a asp-controller="Account" asp-action="ChangePassword" class="list-group-item list-group-item-action">
+                        <i class="fas fa-key"></i> Change Password
+                    </a>
+                    <a asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

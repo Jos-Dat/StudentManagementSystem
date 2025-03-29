@@ -1,0 +1,152 @@
+﻿@model StudentManagementSystem.ViewModels.StudentDashboardViewModel
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome, @Model.Student.User.FirstName!</h1>
+            <p class="lead">This is your student dashboard where you can manage your courses and view your academic progress.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-graduation-cap"></i> Current Enrollments</h4>
+            </div>
+            <div class="card-body">
+                @if (Model.CurrentEnrollments.Count > 0)
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Course Code</th>
+                                <th>Title</th>
+                                <th>Semester</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var enrollment in Model.CurrentEnrollments)
+                            {
+                                <tr>
+                                    <td>@enrollment.Course.CourseCode</td>
+                                    <td>@enrollment.Course.Title</td>
+                                    <td>@enrollment.Semester</td>
+                                    <td>
+                                        <a asp-controller="Course" asp-action="Details" asp-route-id="@enrollment.CourseId" class="btn btn-sm btn-info">
+                                            <i class="fas fa-info-circle"></i> Details
+                                        </a>
+                                        <form asp-action="UnenrollCourse" asp-route-enrollmentId="@enrollment.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to drop this course?')">
+                                                <i class="fas fa-trash"></i> Drop
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        You are not currently enrolled in any courses. <a asp-action="CourseRegistration">Click here</a> to browse available courses.
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-action="CourseRegistration" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Register for Courses
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h4><i class="fas fa-check-circle"></i> Completed Courses</h4>
+            </div>
+            <div class="card-body">
+                @if (Model.CompletedCourses.Count > 0)
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Course Code</th>
+                                <th>Title</th>
+                                <th>Semester</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var enrollment in Model.CompletedCourses)
+                            {
+                                <tr>
+                                    <td>@enrollment.Course.CourseCode</td>
+                                    <td>@enrollment.Course.Title</td>
+                                    <td>@enrollment.Semester</td>
+                                    <td class="font-weight-bold">
+                                        @if (enrollment.Grade.HasValue)
+                                        {
+                                            @enrollment.Grade.Value.ToString("F1")
+                                        }
+                                        else
+                                        {
+                                            <span>N/A</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        You haven't completed any courses yet.
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <a asp-action="Transcript" class="btn btn-success">
+                    <i class="fas fa-file-alt"></i> View Full Transcript
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4><i class="fas fa-user"></i> Student Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Student Number:</strong> @Model.Student.StudentNumber</p>
+                        <p><strong>Name:</strong> @Model.Student.User.FirstName @Model.Student.User.LastName</p>
+                        <p><strong>Email:</strong> @Model.Student.User.Email</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Enrollment Date:</strong> @Model.Student.EnrollmentDate.ToString("MMMM dd, yyyy")</p>
+                        <p><strong>Phone:</strong> @(string.IsNullOrEmpty(Model.Student.PhoneNumber) ? "Not provided" : Model.Student.PhoneNumber)</p>
+                        <p><strong>Address:</strong> @(string.IsNullOrEmpty(Model.Student.Address) ? "Not provided" : Model.Student.Address)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-action="Profile" class="btn btn-info">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
