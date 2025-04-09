@@ -19,7 +19,6 @@
                         <th>Title</th>
                         <th>Credits</th>
                         <th>Semester</th>
-                        <th>Faculty</th>
                         <th>Status</th>
                         <th>Enrollments</th>
                         <th>Actions</th>
@@ -33,16 +32,7 @@
                             <td>@course.Title</td>
                             <td>@course.Credits</td>
                             <td>@course.Semester</td>
-                            <td>
-                                @if (course.FacultyId.HasValue)
-                                {
-                                    <span>Faculty ID: @course.FacultyId</span>
-                                }
-                                else
-                                {
-                                    <span class="text-muted">Not Assigned</span>
-                                }
-                            </td>
+                     
                             <td>
                                 @if (course.IsActive)
                                 {

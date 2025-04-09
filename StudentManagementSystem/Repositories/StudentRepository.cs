@@ -13,6 +13,7 @@ namespace StudentManagementSystem.Repositories
         Task<Student> GetStudentWithUserAsync(int id);
         Task<IEnumerable<Student>> GetStudentsWithUsersAsync();
         Task<IEnumerable<Student>> GetStudentsByCourseAsync(int courseId);
+       
     }
 
     public class StudentRepository : Repository<Student>, IStudentRepository

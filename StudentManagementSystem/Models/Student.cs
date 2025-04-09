@@ -7,6 +7,8 @@ namespace StudentManagementSystem.Models
 {
     public class Student
     {
+        internal string Name;
+
         [Key]
         public int Id { get; set; }
 

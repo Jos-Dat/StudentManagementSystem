@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aAvvEGwagezXT7/WW5eKQI/aLSyjM1FO76ZKKoVb2Ik=",
+  "Hash": "Zbfk/Pr62YQazhbpGXYxzWcLWySxSkjzR1FAfVMltmA=",
   "Source": "StudentManagementSystem",
   "BasePath": "_content/StudentManagementSystem",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "1ighmn6mft",
-      "Integrity": "yd+bm9QoErFNp5CRafDPpvbRweqnI4skRej4Mi9v+MY=",
+      "Fingerprint": "zmlp9m04wb",
+      "Integrity": "NQWI3PNABq6CxRLaI+CEjbul8Fg5KWxkX5Hp0kouYx8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -1321,51 +1321,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.1ighmn6mft.css",
-      "AssetFile": "D:\\Study\\App Programming and Design\\StudentManagementSystem\\StudentManagementSystem\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2107"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"yd+bm9QoErFNp5CRafDPpvbRweqnI4skRej4Mi9v+MY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:54:47 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "1ighmn6mft"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-yd+bm9QoErFNp5CRafDPpvbRweqnI4skRej4Mi9v+MY="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "D:\\Study\\App Programming and Design\\StudentManagementSystem\\StudentManagementSystem\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1376,7 +1331,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2107"
+          "Value": "2110"
         },
         {
           "Name": "Content-Type",
@@ -1384,11 +1339,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yd+bm9QoErFNp5CRafDPpvbRweqnI4skRej4Mi9v+MY=\""
+          "Value": "\"NQWI3PNABq6CxRLaI+CEjbul8Fg5KWxkX5Hp0kouYx8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:54:47 GMT"
+          "Value": "Wed, 02 Apr 2025 01:26:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1398,7 +1353,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yd+bm9QoErFNp5CRafDPpvbRweqnI4skRej4Mi9v+MY="
+          "Value": "sha256-NQWI3PNABq6CxRLaI+CEjbul8Fg5KWxkX5Hp0kouYx8="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.zmlp9m04wb.css",
+      "AssetFile": "D:\\Study\\App Programming and Design\\StudentManagementSystem\\StudentManagementSystem\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2110"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NQWI3PNABq6CxRLaI+CEjbul8Fg5KWxkX5Hp0kouYx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Apr 2025 01:26:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zmlp9m04wb"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NQWI3PNABq6CxRLaI+CEjbul8Fg5KWxkX5Hp0kouYx8="
         }
       ]
     },
@@ -1507,7 +1507,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:54:47 GMT"
+          "Value": "Wed, 02 Apr 2025 01:26:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1552,7 +1552,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:54:47 GMT"
+          "Value": "Wed, 02 Apr 2025 01:26:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6263,7 +6263,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:59:40 GMT"
+          "Value": "Wed, 09 Apr 2025 05:10:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6308,7 +6308,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:59:40 GMT"
+          "Value": "Wed, 09 Apr 2025 05:10:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6353,7 +6353,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:59:40 GMT"
+          "Value": "Wed, 09 Apr 2025 05:10:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6390,7 +6390,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 12:59:40 GMT"
+          "Value": "Wed, 09 Apr 2025 05:10:35 GMT"
         },
         {
           "Name": "Cache-Control",

@@ -113,21 +113,17 @@ namespace StudentManagementSystem.Services
             var course = await _courseRepository.GetByIdAsync(courseId);
             if (course == null || !course.IsActive)
                 return false;
-
             // Check if student exists
             var student = await _studentRepository.GetByIdAsync(studentId);
             if (student == null)
                 return false;
-
             // Check if student is already enrolled in this course
             if (await _enrollmentRepository.ExistsAsync(e => e.CourseId == courseId && e.StudentId == studentId))
                 return false;
-
             // Check if course has reached maximum enrollment
             var currentEnrollments = await _enrollmentRepository.CountAsync(e => e.CourseId == courseId);
             if (currentEnrollments >= course.MaxStudents)
                 return false;
-
             // Create enrollment
             var enrollment = new Enrollment
             {
@@ -138,7 +134,6 @@ namespace StudentManagementSystem.Services
                 Semester = semester,
                 AcademicYear = academicYear
             };
-
             await _enrollmentRepository.AddAsync(enrollment);
             return true;
         }

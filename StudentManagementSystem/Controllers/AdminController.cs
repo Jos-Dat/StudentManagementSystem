@@ -193,6 +193,8 @@ namespace StudentManagementSystem.Controllers
         public async Task<IActionResult> CreateCourse(Course course)
         {
 
+            Console.WriteLine("CreateCourse POST method reached");
+
             if (!ModelState.IsValid)
             {
                 return View(course);
@@ -207,6 +209,11 @@ namespace StudentManagementSystem.Controllers
 
             TempData["SuccessMessage"] = "Course created successfully.";
             return RedirectToAction("ManageCourses");
+        }
+        [HttpPost]
+        public IActionResult TestCreate([FromBody] Course course)
+        {
+            return Json(new { success = true, message = "Test successful", data = course });
         }
 
         [HttpGet]
